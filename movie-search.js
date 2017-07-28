@@ -11,8 +11,18 @@ http.get(URL, (response) => {
   response.on('end', () => {
     try {
       const $ = cheerio.load(rawData)
-      console.log($('.result_text').text())
-
+      const titles = []
+      //There are multiple sections called .findSection, we only need the movies
+      //so we look for the first .findSection, and grab the .result_text from it
+      $('.findSection')
+        .first()
+        .find('.result_text')
+        .each((i, elem) => {
+          titles[i] = $(elem).text()
+        })
+      titles.forEach((element) => {
+        console.log(element)
+      })
     } catch (error) {
       console.error(error)
     }
