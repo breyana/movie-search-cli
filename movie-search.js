@@ -1,8 +1,8 @@
 const http = require('http')
 const cheerio = require('cheerio')
 
-const search = encodeURI(process.argv[2])
-const URL = 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' + search + '&s=all'
+const query = encodeURI(process.argv[2])
+const URL = `http://www.imdb.com/find?ref_=nv_sr_fn&q=${query}&s=all`
 
 const printTitles = (rawData) => {
   const $ = cheerio.load(rawData)
