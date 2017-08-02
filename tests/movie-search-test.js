@@ -11,5 +11,8 @@ context('Movie Search Command Line Interface', () => {
   ' Inception (2010) (TV Episode) - HBO First Look (1992) (TV Series)  ',
   ' Inception: The Cobol Job (2010) (Video) ' ])
     })
+    it('Throws an error if the page is empty', () => {
+      expect(() => printTitles('')).to.throw()
+    })
   })
 })

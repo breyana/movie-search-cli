@@ -5,6 +5,9 @@ const query = encodeURI(process.argv[2])
 const URL = `http://www.imdb.com/find?ref_=nv_sr_fn&q=${query}&s=all`
 
 const printTitles = (rawData) => {
+  if (rawData === '' || !rawData) {
+    throw new Error('Page has no data')
+  }
   const $ = cheerio.load(rawData)
   const titles = []
   //There are multiple sections called .findSection, we only need the movies
