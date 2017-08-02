@@ -18,9 +18,10 @@ const printTitles = (rawData) => {
   titles.forEach((element) => {
     console.log(element)
   })
+  return titles
 }
 
-http.get(URL, (response) => {
+http.get(URL, response => {
   response.setEncoding('utf8')
   let rawData = ''
   response.on('data', (data) => { rawData += data })
@@ -33,3 +34,5 @@ http.get(URL, (response) => {
 
   })
 })
+
+module.exports = printTitles
