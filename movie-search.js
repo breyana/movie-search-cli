@@ -4,7 +4,7 @@ const cheerio = require('cheerio')
 const query = encodeURI(process.argv[2])
 const URL = `http://www.imdb.com/find?ref_=nv_sr_fn&q=${query}&s=all`
 
-const printTitles = (rawData) => {
+const parseTitlesFromHTML = (rawData) => {
   if (rawData === '' || !rawData) {
     throw new Error('Page has no data')
   }
@@ -18,9 +18,6 @@ const printTitles = (rawData) => {
     .each((i, elem) => {
       titles[i] = $(elem).text()
     })
-  titles.forEach((element) => {
-    console.log(element)
-  })
   return titles
 }
 
@@ -30,7 +27,8 @@ http.get(URL, response => {
   response.on('data', (data) => { rawData += data })
   response.on('end', () => {
     try {
-      printTitles(rawData)
+      const titles = parseTitlesFromHTML(rawData)
+      titles.forEach(element => console.log(element))
     } catch (error) {
       console.error(error)
     }
@@ -38,4 +36,4 @@ http.get(URL, response => {
   })
 })
 
-module.exports = printTitles
+module.exports = parseTitlesFromHTML
